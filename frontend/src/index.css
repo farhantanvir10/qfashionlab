@@ -1,0 +1,9 @@
+@import 'tailwindcss';
+
+@font-face {
+    font-family: 'ChickenDinner';
+    src: url('/assets/fonts/ChickenDinnerDemo.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
