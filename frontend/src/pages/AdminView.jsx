@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { FaEdit, FaTrash } from 'react-icons/fa';
+import { axiosInstance } from '../lib/axios';
 
 function AdminView() {
     const [products, setProducts] = useState([]);
@@ -28,14 +28,11 @@ function AdminView() {
         }
         ///
         try {
-            const response = await axios.get(
-                'http://localhost:2005/api/sellerProductUpload/products',
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
+            const response = await axiosInstance.get('/sellerProductUpload/products', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
 
             if (Array.isArray(response.data)) {
                 setProducts(response.data);
@@ -54,7 +51,7 @@ function AdminView() {
     const handleDelete = async (id) => {
         const token = localStorage.getItem('token');
         try {
-            await axios.delete(`http://localhost:2005/api/sellerProductUpload/products/${id}`, {
+            await axiosInstance.delete(`/sellerProductUpload/products/${id}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             setProducts(products.filter((product) => product._id !== id));
@@ -69,18 +66,20 @@ function AdminView() {
         navigate(`/edit/${product._id}`, { state: product });
     };
 
-    const filteredProducts = products.filter((product) =>
-        product.productName.toLowerCase().includes(searchTerm.toLowerCase())
+    const filteredProducts = products.filter(
+        (product) =>
+            product.productCode.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            product.productCategory.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     return (
         <div className="max-w-6xl mx-auto p-6">
-            <div className="flex justify-between items-center mb-4"> 
-                <h2 className="text-3xl font-bold">Product List</h2>
+            <div className="flex justify-between items-center mb-4">
+                <h2 className="text-xl md:text-3xl font-bold">Product List</h2>
                 <input
                     type="text"
                     placeholder="Search products..."
-                    className="lg:w-3xl p-2 border rounded"
+                    className="w-[40vw] md:w-[60vw] px-4 py-1 border border-gray-500 rounded-lg"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
@@ -96,31 +95,30 @@ function AdminView() {
                         filteredProducts.map((product) => (
                             <div
                                 key={product._id}
-                                className="shadow-lg relative bg-white rounded-xl overflow-hidden"
+                                className="relative rounded-xl border border-gray-500 shadow-md shadow-black overflow-hidden"
                             >
                                 <img
                                     src={product.productImage}
-                                    alt={product.productName}
+                                    alt={product.productCode}
                                     className="w-full h-65 object-cover object-center"
                                 />
-                                <div className="m-4">
-                                    <h3 className="text-xl font-semibold">
-                                        {product.productName.length > 20
-                                            ? `${product.productName.slice(0, 20)}...`
-                                            : product.productName}
+                                <div className="flex justify-between items-center mx-2 my-4">
+                                    <h3 className="text-lg font-semibold">{product.productCode}</h3>
+                                    <h3 className="text-lg font-semibold">
+                                        {product.productCategory}
                                     </h3>
                                 </div>
 
                                 <div className="flex justify-between items-center mt-2">
                                     <button
-                                        className="flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded-tr-xl"
+                                        className="flex items-center gap-2 bg-green-500 px-4 py-2 rounded-tr-xl"
                                         onClick={() => handleEdit(product)}
                                     >
                                         <FaEdit />
                                         Edit
                                     </button>
                                     <button
-                                        className="flex items-center gap-2 bg-red-500 text-white px-4 py-2 rounded-tl-xl"
+                                        className="flex items-center gap-2 bg-red-500 px-4 py-2 rounded-tl-xl"
                                         onClick={() => handleDelete(product._id)}
                                     >
                                         <FaTrash />

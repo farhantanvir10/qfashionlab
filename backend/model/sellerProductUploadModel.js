@@ -7,21 +7,13 @@ const productSchema = new mongoose.Schema(
             ref: 'sellerlogin',
             required: 'true',
         },
-        productName: {
+        productCode: {
             type: String,
             required: true,
         },
 
         productCategory: {
             type: String,
-            required: true,
-        },
-        productOriginalPrice: {
-            type: Number,
-            required: true,
-        },
-        productOfferPrice: {
-            type: Number,
             required: true,
         },
         productImage: {

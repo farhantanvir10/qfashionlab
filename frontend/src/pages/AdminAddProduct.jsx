@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
+import { axiosInstance } from '../lib/axios';
 
 function AdminAddProduct() {
     const [formData, setFormData] = useState({
-        productName: '',
-        productOriginalPrice: '',
-        productOfferPrice: '',
-        productCategory: 'Laptop',
+        productCode: '',
+        productCategory: 'FeatureDesign',
         productImage: null,
     });
 
@@ -27,27 +25,9 @@ function AdminAddProduct() {
     };
 
     const validateForm = () => {
-        const {
-            productName,
-            productOriginalPrice,
-            productOfferPrice,
-            productCategory,
-            productImage,
-        } = formData;
-        if (
-            !productName ||
-            !productOriginalPrice ||
-            !productOfferPrice ||
-            !productCategory ||
-            !productImage
-        ) {
+        const { productCode, productCategory, productImage } = formData;
+        if (!productCode || !productCategory || !productImage) {
             return 'All fields are required!';
-        }
-        if (Number(productOriginalPrice) <= 0 || Number(productOfferPrice) <= 0) {
-            return 'Price and Offer Price must be positive!';
-        }
-        if (Number(productOfferPrice) > Number(productOriginalPrice)) {
-            return 'Offer Price cannot be greater than Original Price!';
         }
         return null;
     };
@@ -64,9 +44,7 @@ function AdminAddProduct() {
         setMessage('');
 
         const productData = new FormData();
-        productData.append('productName', formData.productName);
-        productData.append('productOriginalPrice', formData.productOriginalPrice);
-        productData.append('productOfferPrice', formData.productOfferPrice);
+        productData.append('productCode', formData.productCode.toUpperCase());
         productData.append('productCategory', formData.productCategory);
         productData.append('productImage', formData.productImage);
 
@@ -78,22 +56,15 @@ function AdminAddProduct() {
         }
 
         try {
-            await axios.post(
-                'http://localhost:2005/api/sellerProductUpload/products',
-                productData,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
-
+            await axiosInstance.post('/sellerProductUpload/products', productData, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             setMessage('Product uploaded successfully!');
             setFormData({
-                productName: '',
-                productOriginalPrice: '',
-                productOfferPrice: '',
-                productCategory: 'Laptop',
+                productCode: '',
+                productCategory: 'Feature Design',
                 productImage: null,
             });
             setImagePreview(null);
@@ -106,65 +77,31 @@ function AdminAddProduct() {
     };
 
     return (
-        <div className="max-w-2xl mx-auto bg-white p-6 shadow-2xl rounded-lg mt-4">
+        <div className="max-w-2xl mx-auto p-6 border border-gray-500 shadow-md shadow-black rounded-lg md:mt-6">
             <h2 className="text-2xl text-center font-bold mb-4">Add Product</h2>
 
             {message && <p className="text-center text-red-500">{message}</p>}
 
             <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="flex gap-6">
-                    <div className='space-y-4'>
+                <div className="md:flex gap-6">
+                    <div className="md:w-1/3 space-y-4">
                         <div>
-                            <label htmlFor="productName" className="block text-gray-700">
-                                Product Name
+                            <label htmlFor="productCode" className="block">
+                                Product Code
                             </label>
                             <input
                                 type="text"
-                                id="productName"
-                                name="productName"
-                                value={formData.productName}
+                                id="productCode"
+                                name="productCode"
+                                value={formData.productCode}
                                 onChange={handleChange}
-                                className="w-full p-2 border rounded"
-                                placeholder="Enter product name"
+                                className="w-full p-2 border border-gray-500 rounded"
+                                placeholder="Enter product code"
                             />
                         </div>
 
-                        <div className="grid grid-cols-2 gap-4">
-                            <div>
-                                <label
-                                    htmlFor="productOriginalPrice"
-                                    className="block text-gray-700"
-                                >
-                                    Original Price
-                                </label>
-                                <input
-                                    type="number"
-                                    id="productOriginalPrice"
-                                    name="productOriginalPrice"
-                                    value={formData.productOriginalPrice}
-                                    onChange={handleChange}
-                                    className="w-full p-2 border rounded"
-                                    placeholder="Enter original price"
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="productOfferPrice" className="block text-gray-700">
-                                    Offer Price
-                                </label>
-                                <input
-                                    type="number"
-                                    id="productOfferPrice"
-                                    name="productOfferPrice"
-                                    value={formData.productOfferPrice}
-                                    onChange={handleChange}
-                                    className="w-full p-2 border rounded"
-                                    placeholder="Enter offer price"
-                                />
-                            </div>
-                        </div>
-
                         <div>
-                            <label htmlFor="productCategory" className="block text-gray-700">
+                            <label htmlFor="productCategory" className="block">
                                 Category
                             </label>
                             <select
@@ -172,7 +109,7 @@ function AdminAddProduct() {
                                 name="productCategory"
                                 value={formData.productCategory}
                                 onChange={handleChange}
-                                className="w-full p-2 border rounded"
+                                className="w-full p-2 border border-gray-500 rounded"
                             >
                                 <option value="Feature Design">Feature Design</option>
                                 <option value="Previously Ordered">Previously Ordered</option>
@@ -180,17 +117,17 @@ function AdminAddProduct() {
                             </select>
                         </div>
                     </div>
-                    <div>
-                        <label className="block text-gray-700">Product Image</label>
-                        <div className="border border-gray-300 p-4 rounded-lg text-center">
+                    <div className="md:w-2/3 mt-4 md:mt-0">
+                        <label className="block">Product Image</label>
+                        <div className="border border-gray-500 p-4 rounded-lg text-center">
                             {imagePreview ? (
                                 <img
                                     src={imagePreview}
                                     alt="Preview"
-                                    className="w-full h-40 object-cover rounded-md"
+                                    className="w-full h-60 object-cover rounded-md"
                                 />
                             ) : (
-                                <div className="flex flex-col items-center justify-center h-40 border-2 border-dashed border-gray-400 rounded-md">
+                                <div className="flex flex-col items-center justify-center h-40 border-2 border-dashed border-gray-500 rounded-md">
                                     <span className="text-gray-500">Upload an image</span>
                                 </div>
                             )}

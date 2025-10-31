@@ -1,27 +1,23 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { axiosInstance } from '../lib/axios';
 
 function EditProduct() {
     const location = useLocation();
     const navigate = useNavigate();
     const product = location.state;
 
-    const [productName, setProductName] = useState(product.productName);
-    const [productOriginalPrice, setProductOriginalPrice] = useState(product.productOriginalPrice);
-    const [productOfferPrice, setProductOfferPrice] = useState(product.productOfferPrice);
+    const [productCode, setproductCode] = useState(product.productCode);
     const [productCategory, setProductCategory] = useState(product.productCategory);
     const [productImage, setProductImage] = useState(product.productImage);
 
     const handleUpdate = async () => {
         const token = localStorage.getItem('token');
         try {
-            await axios.put(
-                `http://localhost:2005/api/sellerProductUpload/products/${product._id}`,
+            await axiosInstance.put(
+                `/sellerProductUpload/products/${product._id}`,
                 {
-                    productName,
-                    productOriginalPrice,
-                    productOfferPrice,
+                    productCode,
                     productCategory,
                     productImage,
                 },
@@ -30,67 +26,67 @@ function EditProduct() {
                 }
             );
 
-            alert('Product Updated');
+            // alert('Product Updated');
             navigate('/admin-view');
         } catch (error) {
             console.error('Update error:', error);
-            alert('Failed to update product.');
+            // alert('Failed to update product.');
         }
     };
 
     return (
-        <div className="max-w-4xl mx-auto p-6">
-            <h2 className="text-3xl font-bold mb-4">Edit Product</h2>
-
-            <div>
-                <label>Product Name:</label>
-                <input
-                    type="text"
-                    className="w-full p-2 border rounded mb-4"
-                    value={productName}
-                    onChange={(e) => setProductName(e.target.value)}
+        <div className="max-w-4xl mx-auto p-6 md:my-6 border border-gray-500 shadow-md shadow-black rounded-lg">
+            <h2 className="text-center text-3xl font-semibold mb-4">Edit Product</h2>
+            <div className="md:flex gap-6">
+                <img
+                    src={product.productImage || 'https://via.placeholder.com/150'}
+                    alt={product.productCode}
+                    className="w-full md:w-1/2 h-full object-cover object-center mb-4"
                 />
-            </div>
 
-            <div>
-                <label>Original Price:</label>
-                <input
-                    type="number"
-                    className="w-full p-2 border rounded mb-4"
-                    value={productOriginalPrice}
-                    onChange={(e) => setProductOriginalPrice(e.target.value)}
-                />
-            </div>
+                <div className="flex flex-col justify-between md:w-1/2">
+                    <div>
+                        <div>
+                            <label>Product Code:</label>
+                            <input
+                                type="text"
+                                className="w-full p-2 border border-gray-500 rounded mt-1 mb-4"
+                                value={productCode}
+                                onChange={(e) => setproductCode(e.target.value.toUpperCase())}
+                            />
+                        </div>
+                        <div>
+                            <label>Category:</label>
+                            <select
+                                id="productCategory"
+                                name="productCategory"
+                                value={productCategory}
+                                onChange={(e) => setProductCategory(e.target.value)}
+                                className="w-full p-2 mt-1 bg-[#1E3A5F] border border-gray-500 rounded"
+                            >
+                                <option value="Feature Design">Feature Design</option>
+                                <option value="Previously Ordered">Previously Ordered</option>
+                                <option value="Customer Satisfaction">Customer Satisfaction</option>
+                            </select>
+                        </div>
+                    </div>
 
-            <div>
-                <label>Offer Price:</label>
-                <input
-                    type="number"
-                    className="w-full p-2 border rounded mb-4"
-                    value={productOfferPrice}
-                    onChange={(e) => setProductOfferPrice(e.target.value)}
-                />
+                    <div className="flex justify-end mt-4">
+                        <button
+                            className="bg-blue-500 p-2 rounded"
+                            onClick={handleUpdate}
+                        >
+                            Update Product
+                        </button>
+                        <button
+                            className="bg-gray-600 p-2 rounded ml-4"
+                            onClick={() => navigate('/admin-view')}
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                </div>
             </div>
-
-            <div>
-                <label>Category:</label>
-                <input
-                    type="text"
-                    className="w-full p-2 border rounded mb-4"
-                    value={productCategory}
-                    onChange={(e) => setProductCategory(e.target.value)}
-                />
-            </div>
-
-            <button className="bg-blue-500 text-white p-2 rounded" onClick={handleUpdate}>
-                Update Product
-            </button>
-            <button
-                className="bg-gray-500 text-white p-2 rounded ml-4"
-                onClick={() => navigate('/admin-view')}
-            >
-                Cancel
-            </button>
         </div>
     );
 }

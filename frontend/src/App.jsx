@@ -41,18 +41,18 @@ function AppContent() {
             {(isAdminPage || isEditProductPage) && !isSellerPage && <SellerNavBar />}
 
             <Routes>
-                <Route path="/" element={<Home searchQuery={searchQuery} />} />
-                <Route path="contact" element={<Contact />} />
-                <Route path="about" element={<About />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/about" element={<About />} />
                 <Route path="/product/:id" element={<ProductDetails />} />
                 {/* Admin Routes */}
-                <Route path="seller-signup" element={<AdminSignup />} />
-                <Route path="seller-login" element={<AdminLogin />} />
+                <Route path="/seller-signup" element={<AdminSignup />} />
+                <Route path="/seller-login" element={<AdminLogin />} />
                 <Route path="/admin" element={<AdminView />} />
-                <Route path="admin-add-product" element={<AdminAddProduct />} />
+                <Route path="/admin-add-product" element={<AdminAddProduct />} />
                 <Route path="/edit/:id" element={<EditProduct />} />
-                <Route path="admin-view" element={<AdminView />} />
-                <Route path="seller-reset-password" element={<SellerResetPassword />} />
+                <Route path="/admin-view" element={<AdminView />} />
+                <Route path="/seller-reset-password" element={<SellerResetPassword />} />
             </Routes>
 
             {!isAdminPage && !isEditProductPage && <Footer />}
