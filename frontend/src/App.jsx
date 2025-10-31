@@ -15,7 +15,7 @@ import AdminLogin from './pages/AdminLogin';
 import AdminView from './pages/AdminView';
 import AdminAddProduct from './pages/AdminAddProduct';
 import EditProduct from './pages/EditProduct';
-import SellerResetPassword from './pages/sellerResetPassword';
+import SellerResetPassword from './pages/SellerResetPassword';
 function AppContent() {
     const location = useLocation();
     const [searchQuery, setSearchQuery] = useState('');
