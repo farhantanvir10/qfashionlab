@@ -11,15 +11,13 @@ const productUpload = async (req, res) => {
             return res.status(401).json({ error: 'Unauthorized: User not authenticated' });
         }
 
-        const { productName, productCategory, productOriginalPrice, productOfferPrice } = req.body;
+        const { productCode, productCategory } = req.body;
         const result = await cloudinary.uploader.upload(req.file.path);
 
         const newProduct = new sellerProductModel({
             userId: req.user.id,
-            productName,
+            productCode,
             productCategory,
-            productOriginalPrice,
-            productOfferPrice,
             productImage: result.secure_url,
             imagePublicId: result.public_id,
         });

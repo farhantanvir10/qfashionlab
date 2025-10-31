@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { axiosInstance } from '../lib/axios';
 
 function AdminSignup() {
     const [data, setData] = useState({
@@ -23,8 +23,8 @@ function AdminSignup() {
         }
 
         try {
-            const response = await axios.post(
-                'http://localhost:2005/api/sellerLogin/register',
+            const response = await axiosInstance.post(
+                '/sellerLogin/register',
                 data
             );
             if (response.data) {

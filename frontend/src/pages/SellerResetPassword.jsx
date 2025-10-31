@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { axiosInstance } from '../lib/axios';
 
 function SellerResetPassword() {
     const [data, setData] = useState({
@@ -26,10 +26,7 @@ function SellerResetPassword() {
         }
 
         try {
-            const response = await axios.put(
-                'http://localhost:2005/api/sellerLogin/c-password',
-                data
-            );
+            const response = await axiosInstance.put('/sellerLogin/c-password', data);
             if (response.data) {
                 setData({
                     email: '',

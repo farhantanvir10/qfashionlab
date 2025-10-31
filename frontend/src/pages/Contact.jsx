@@ -1,12 +1,21 @@
-import React from 'react';
-import { FaEnvelope, FaLinkedin, FaInstagram, FaGithub, FaFacebook, FaWhatsapp, FaPhone } from 'react-icons/fa';
+import { FaEnvelope, FaFacebook, FaWhatsapp, FaPhone } from 'react-icons/fa';
 
 function Contact() {
+    const phoneNumber = '+8801771177801';
+    const handleDial = () => {
+        // Fallback for non-mobile: Just log or redirect to a contact page
+        if (!window.location.href.includes('mobile')) {
+            alert('For calls, visit our contact page!');
+            return;
+        }
+        // Open dialer with tel: protocol
+        window.location.href = `tel:${phoneNumber}`;
+    };
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6 ">
-            <div className="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full text-center mb-20">
-                <h1 className="text-3xl font-bold text-gray-800 mb-4">Contact Me</h1>
-                <p className="text-gray-600 mb-6">
+        <div className="sm:min-h-screen flex sm:items-center justify-center sm:p-6">
+            <div className="p-8 border border-gray-500 sm:rounded-lg sm:shadow-md shadow-black max-w-lg w-full text-center mb-20">
+                <h1 className="text-3xl font-bold text-gray-200 mb-4">Contact Me</h1>
+                <p className="mb-6">
                     Feel free to reach out through any of the platforms below:
                 </p>
 
@@ -36,14 +45,12 @@ function Contact() {
                         <FaWhatsapp className="text-xl" /> WhatsApp
                     </a>
 
-                    <a
-                        href="+8801771177801"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                    <button
                         className="flex items-center justify-center gap-3 bg-gray-800 hover:bg-black text-white px-4 py-2 rounded-lg transition"
+                        onClick={handleDial}
                     >
                         <FaPhone className="text-xl" /> 01771177801
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>

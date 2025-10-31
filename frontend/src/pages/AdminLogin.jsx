@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import logo from '../assets/favicon.png';
+import { axiosInstance } from '../lib/axios';
 function AdminLogin() {
     const [data, setData] = useState({
         email: '',
@@ -13,7 +13,7 @@ function AdminLogin() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const log = await axios.post('http://localhost:2005/api/sellerLogin/login', data);
+            const log = await axiosInstance.post('/sellerLogin/login', data);
 
             if (log.status === 200 && log.data.token) {
                 localStorage.setItem('token', log.data.token);
