@@ -10,7 +10,7 @@ import Contact from './pages/Contact';
 import About from './pages/About';
 import ProductDetails from './pages/ProductDetails';
 
-import AdminSignup from './pages/adminSignup';
+import AdminSignup from './pages/AdminSignup';
 import AdminLogin from './pages/AdminLogin';
 import AdminView from './pages/AdminView';
 import AdminAddProduct from './pages/AdminAddProduct';
