@@ -4,7 +4,7 @@ import { axiosInstance } from '../lib/axios';
 function AdminAddProduct() {
     const [formData, setFormData] = useState({
         productCode: '',
-        productCategory: 'FeatureDesign',
+        productCategory: 'Feature Design',
         productImage: null,
     });
 
@@ -77,7 +77,7 @@ function AdminAddProduct() {
     };
 
     return (
-        <div className="max-w-2xl mx-auto p-6 border border-gray-500 shadow-md shadow-black rounded-lg md:mt-6">
+        <div className="max-w-2xl mx-auto p-6 sm:border border-gray-500 shadow-md shadow-black rounded-lg md:mt-6">
             <h2 className="text-2xl text-center font-bold mb-4">Add Product</h2>
 
             {message && <p className="text-center text-red-500">{message}</p>}
@@ -128,7 +128,7 @@ function AdminAddProduct() {
                                 />
                             ) : (
                                 <div className="flex flex-col items-center justify-center h-40 border-2 border-dashed border-gray-500 rounded-md">
-                                    <span className="text-gray-500">Upload an image</span>
+                                    <span className="">Upload an image</span>
                                 </div>
                             )}
                             <input

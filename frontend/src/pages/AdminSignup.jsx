@@ -43,10 +43,10 @@ function AdminSignup() {
     };
 
     return (
-        <div className="flex justify-center items-center h-screen bg-gray-100">
-            <div className="bg-white p-8 rounded-2xl shadow-lg w-96">
+        <div className="flex justify-center items-center h-screen">
+            <div className="p-8 rounded-2xl border border-gray-500 shadow-md shadow-black w-96">
                 <h2 className="text-2xl font-semibold text-center">Create an account for Seller</h2>
-                <p className="text-gray-500 text-center mb-4">Enter your details below</p>
+                <p className=" text-center mb-4">Enter your details below</p>
 
                 {error && <p className="text-red-500 text-center">{error}</p>}
                 {success && <p className="text-green-500 text-center">{success}</p>}
@@ -55,7 +55,7 @@ function AdminSignup() {
                     <input
                         type="text"
                         placeholder="Name"
-                        className="w-full p-3 border border-gray-300 rounded-md"
+                        className="w-full p-3 border border-gray-500 rounded-md"
                         value={data.name}
                         name="name"
                         onChange={(e) => setData({ ...data, [e.target.name]: e.target.value })}
@@ -63,7 +63,7 @@ function AdminSignup() {
                     <input
                         type="email"
                         placeholder="Email or Phone Number"
-                        className="w-full p-3 border border-gray-300 rounded-md"
+                        className="w-full p-3 border border-gray-500 rounded-md"
                         value={data.email}
                         name="email"
                         onChange={(e) => setData({ ...data, [e.target.name]: e.target.value })}
@@ -71,7 +71,7 @@ function AdminSignup() {
                     <input
                         type="password"
                         placeholder="Password"
-                        className="w-full p-3 border border-gray-300 rounded-md"
+                        className="w-full p-3 border border-gray-500 rounded-md"
                         value={data.password}
                         name="password"
                         onChange={(e) => setData({ ...data, [e.target.name]: e.target.value })}
@@ -79,7 +79,7 @@ function AdminSignup() {
                     <input
                         type="password"
                         placeholder="Confirm Password"
-                        className="w-full p-3 border border-gray-300 rounded-md"
+                        className="w-full p-3 border border-gray-500 rounded-md"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                     />
@@ -92,9 +92,9 @@ function AdminSignup() {
                     </button>
                 </form>
 
-                <p className="text-gray-500 text-center mt-4">
+                <p className=" text-center mt-4">
                     Already have an account?{' '}
-                    <Link to="/seller-login" className="text-gray-800 font-semibold">
+                    <Link to="/seller-login" className="font-semibold">
                         Login
                     </Link>
                 </p>
