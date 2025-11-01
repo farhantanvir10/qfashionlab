@@ -15,11 +15,11 @@ function NavBar() {
             {/* Announcement Bar */}
             <div className="w-full bg-gray-900 text-gray-100 text-center py-1 text-sm md:text-base overflow-hidden">
                 <div className="flex animate-slide whitespace-nowrap">
-                    <p className="flex-shrink-0 mr-[50vw]">
+                    <p className="flex-shrink-0 mr-[5vw] sm:mr-[50vw]">
                         Q Fashion Lab brings you lab-tested comfort, crafted with care.
                     </p>
                     {/* Duplicate for seamless loop */}
-                    <p className="flex-shrink-0 mr-[50vw]">
+                    <p className="flex-shrink-0 mr-[5vw] sm:mr-[50vw]">
                         শুদ্ধতা ও সুরক্ষার মেলবন্ধন – এলার্জিমুক্ত কাপড়ের প্রতিশ্রুতি, শুধু আমাদের কাছেই।
                     </p>
                     <p className="flex-shrink-0">Q Fashion Lab brings you lab-tested comfort, crafted with care.</p>
@@ -28,6 +28,17 @@ function NavBar() {
 
             <style>{`
                 @keyframes slide {
+                    0% {
+                        transform: translateX(12%);
+                    }
+                    100% {
+                        transform: translateX(-220%);
+                    }
+                }
+                .animate-slide {
+                    animation: slide 15s linear infinite;
+                }
+                sm:@keyframes slide {
                     0% {
                         transform: translateX(77%);
                     }
