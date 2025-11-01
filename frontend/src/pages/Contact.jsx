@@ -1,4 +1,5 @@
 import { FaEnvelope, FaFacebook, FaWhatsapp, FaPhone } from "react-icons/fa";
+import { useEffect } from "react";
 
 function Contact() {
   const phoneNumber = "+8801771177801";
@@ -11,6 +12,12 @@ function Contact() {
     // Open dialer with tel: protocol
     window.location.href = `tel:${phoneNumber}`;
   };
+
+  // 👇 Scroll to top smoothly when a new product loads
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [window.location.href]);
+
   return (
     <div className="sm:min-h-screen flex sm:items-center justify-center sm:p-6">
       <div className="p-8 sm:border border-gray-500 sm:rounded-lg sm:shadow-md shadow-black max-w-lg w-full text-center mb-20">

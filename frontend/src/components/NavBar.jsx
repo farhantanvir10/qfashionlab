@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { FaBars, FaTimes } from 'react-icons/fa';
-import icon from '../assets/favicon.png';
-import qfashion from '../assets/qfashionlab.png';
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import { FaBars, FaTimes } from "react-icons/fa";
+import icon from "../assets/favicon.png";
+import qfashion from "../assets/qfashionlab.png";
+import { Link } from "react-router-dom";
 
 function NavBar() {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -10,7 +10,7 @@ function NavBar() {
     return (
         <header
             className="sticky top-0 z-50 shadow-md shadow-black border-b border-gray-500"
-            style={{ backgroundColor: 'var(--primary-bg)' }}
+            style={{ backgroundColor: "var(--primary-bg)" }}
         >
             {/* Announcement Bar */}
             <div className="w-full bg-gray-900 text-gray-100 text-center py-1 text-sm md:text-base overflow-hidden">
@@ -20,17 +20,13 @@ function NavBar() {
                     </p>
                     {/* Duplicate for seamless loop */}
                     <p className="flex-shrink-0 mr-[50vw]">
-                        শুদ্ধতা ও সুরক্ষার মেলবন্ধন – এলার্জিমুক্ত কাপড়ের প্রতিশ্রুতি, শুধু আমাদের
-                        কাছেই।
+                        শুদ্ধতা ও সুরক্ষার মেলবন্ধন – এলার্জিমুক্ত কাপড়ের প্রতিশ্রুতি, শুধু আমাদের কাছেই।
                     </p>
-                    <p className="flex-shrink-0">
-                        Q Fashion Lab brings you lab-tested comfort, crafted with care.
-                    </p>
-                    
+                    <p className="flex-shrink-0">Q Fashion Lab brings you lab-tested comfort, crafted with care.</p>
                 </div>
             </div>
 
-            <style jsx>{`
+            <style>{`
                 @keyframes slide {
                     0% {
                         transform: translateX(77%);
@@ -66,7 +62,7 @@ function NavBar() {
                 {/* Navigation Links */}
                 <div
                     className={`absolute md:relative top-full left-0 w-full bg-[#1E3A5F] md:bg-transparent md:w-auto md:flex items-center gap-6 text-lg font-medium px-4 py-3 md:py-0 transition-all duration-300 ease-in-out ${
-                        menuOpen ? 'block' : 'hidden'
+                        menuOpen ? "block" : "hidden"
                     }`}
                 >
                     <Link

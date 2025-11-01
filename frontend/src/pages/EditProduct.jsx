@@ -35,7 +35,7 @@ function EditProduct() {
     };
 
     return (
-        <div className="max-w-4xl mx-auto p-6 md:my-6 border border-gray-500 shadow-md shadow-black rounded-lg">
+        <div className="max-w-4xl mx-auto p-6 md:my-6 sm:border border-gray-500 sm:shadow-md shadow-black sm:rounded-lg">
             <h2 className="text-center text-3xl font-semibold mb-4">Edit Product</h2>
             <div className="md:flex gap-6">
                 <img

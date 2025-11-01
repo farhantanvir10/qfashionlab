@@ -6,11 +6,11 @@ const Cards = ({ products }) => {
     return (
         <>
             {products.length > 0 && (
-                <div className={`p-5 border-b border-gray-500`}>
+                <div className={`p-3 sm:p-5 border-b border-gray-500`} id={products[0].productCategory[0]}>
                     <h2 className={`lg:w-1/3 rounded-bl-3xl rounded-tr-3xl p-1 bg-[#1E3A5F] border border-gray-600 select-none shadow-md shadow-black text-3xl font-semibold text-center mb-4`}>
                         {products[0].productCategory}
                     </h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6 mb-4">
                         {products.map((product) => (
                             <div
                                 key={product._id}
