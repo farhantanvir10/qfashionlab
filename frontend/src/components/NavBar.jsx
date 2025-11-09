@@ -52,7 +52,7 @@ function NavBar() {
             `}</style>
 
             {/* Main Navigation */}
-            <nav className="container mx-auto px-5 flex items-center justify-between">
+            <nav className="flex items-center justify-between md:px-10">
                 {/* Logo Section */}
                 <div className="flex items-center gap-3 flex-shrink-0">
                     <Link to="/" className="flex items-center gap-2">
@@ -72,7 +72,7 @@ function NavBar() {
 
                 {/* Navigation Links */}
                 <div
-                    className={`absolute md:relative top-full left-0 w-full bg-[#1E3A5F] md:bg-transparent md:w-auto md:flex items-center gap-6 text-lg font-medium px-4 py-3 md:py-0 transition-all duration-300 ease-in-out ${
+                    className={`absolute md:relative top-full left-0 w-full bg-[#1E3A5F] md:bg-transparent md:w-auto md:flex items-center gap-6 text-lg font-medium px-4 md:px-0 py-3 md:py-0 transition-all duration-300 ease-in-out ${
                         menuOpen ? "block" : "hidden"
                     }`}
                 >

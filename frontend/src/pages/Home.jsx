@@ -65,7 +65,7 @@ const Home = () => {
     return (
         <div className="min-h-screen relative">
             {/* Hero Section */}
-            <div className="sm:flex w-full gap-2 md:gap-5 p-2 sm:p-5 justify-center border-b border-gray-500">
+            <div className="sm:flex w-full gap-2 md:gap-5 p-2 sm:p-5 md:px-10 justify-center border-b border-gray-500">
                 <FacebookVideoEmbed />
                 <div className="flex sm:flex-col gap-2">
                     <img
