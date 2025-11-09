@@ -18,6 +18,9 @@ const allowedOrigin =
     ? "https://qfashionlab.vercel.app"  // ✅ specific origin
     : "http://localhost:5173";
 
+
+console.log("Origin : ", allowedOrigin);
+
 app.use(
     cors({
         origin: allowedOrigin, 
@@ -32,13 +35,13 @@ app.use('/api/sellerLogin', sellerLogin);
 app.use('/api/sellerProductUpload', sellerProductUpload);
 
 // make ready for deployment
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../frontend/dist')));
+// if (process.env.NODE_ENV === 'production') {
+//     app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
-    app.get('*', (_, res) => {
-        res.sendFile(path.join(__dirname, '../frontend', 'dist', 'index.html'));
-    });
-}
+//     app.get('*', (_, res) => {
+//         res.sendFile(path.join(__dirname, '../frontend', 'dist', 'index.html'));
+//     });
+// }`
 
 app.listen(PORT, () => {
     db();
